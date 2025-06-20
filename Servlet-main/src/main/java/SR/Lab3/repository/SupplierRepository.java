@@ -14,7 +14,7 @@ public interface SupplierRepository extends JpaRepository<Supplier, Long> {
 
     List<Supplier> findBySurname(String surname);
 
-    // Search suppliers by name, surname, or phone
+   
     @Query("SELECT s FROM Supplier s WHERE " +
             "(:name IS NULL OR LOWER(s.name) LIKE LOWER(CONCAT('%', :name, '%'))) AND " +
             "(:surname IS NULL OR LOWER(s.surname) LIKE LOWER(CONCAT('%', :surname, '%'))) AND " +
@@ -23,7 +23,7 @@ public interface SupplierRepository extends JpaRepository<Supplier, Long> {
                                    @Param("surname") String surname,
                                    @Param("phone") String phone);
 
-    // Простые запросы с подсчетом
+    
     @Query(value = "SELECT s.id, s.name, s.surname, s.phone_number, " +
             "COALESCE(pc.product_count, 0) as product_count " +
             "FROM supplier s " +
